@@ -4,7 +4,7 @@ This repository hosts a proof-of-concept show-casing an issue in Xilinx's Vivado
 
 The final step of the FPGA implementation consists in serializing the generated FPGA design into a bitstream.
 
-Prior to this operation a design rule check (DRC) is performed ensuring that the design is free of obvious electrical issues. One of these checks include that input/output pins be properly constrained.
+Prior to this operation a design rule check (DRC) is performed ensuring that the design is free of obvious electrical issues. One of these checks verifies that input/output pins are properly constrained.
 
 # Usage
 
