@@ -1,3 +1,12 @@
+> [!WARNING]
+> 
+> Xilinx having no plans for fixing this issue, I strongly recommend to enclose port names in braces. Doing so avoids any conflicts with present and more importantly possible future TCL procs which name begins with a number.
+> ```tcl
+> # In all user XDC files
+> set_property PACKAGE_PIN AM11 [get_ports {gpio_led[7]}]; # OK
+> set_property PACKAGE_PIN AM11 [get_ports gpio_led[7]]; # NG
+> ```
+
 This repository contains a minimal, reproducible example (MRE) demonstrating what I believe to be an issue in Xilinx's Vivado EDA suite. The latest generally-available version (v2025.1) is still affected.
 
 I opened a [thread dedicated to this issue](https://adaptivesupport.amd.com/s/question/0D54U000093K9nQSAS/bitstream-drc-fails-if-tcl-proc-name-starts-with-a-certain-numbers) in the Xilinx Vivado community forum.
