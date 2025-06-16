@@ -1,4 +1,6 @@
-This repository hosts a proof-of-concept show-casing an issue in Xilinx's Vivado EDA suite.
+This repository contains a minimal, reproducible example (MRE) demonstrating what I believe to be an issue in Xilinx's Vivado EDA suite. The latest generally-available version (v2025.1) is still affected.
+
+I opened a [thread dedicated to this issue](https://adaptivesupport.amd.com/s/question/0D54U000093K9nQSAS/bitstream-drc-fails-if-tcl-proc-name-starts-with-a-certain-numbers) in the Xilinx Vivado community forum.
 
 # Context
 
@@ -14,23 +16,17 @@ Assuming the path to the Vivado binaries is already set.
 make
 ```
 
-Conversingly assign the path a `vivado` variable.
-
-```shell
-make vivado=/opt/Xilinx/Vivado/2024.2/bin/vivado
-```
-
 # Results
 
 With Vivado 2024.2 on a Linux box.
 
-| TCL proc name | Behavior |
-| ------------- | -------- |
-| `0_user_proc` | ❌ Fail  |
-| `7_user_proc` | ❌ Fail  |
-| `8_user_proc` | ✅ Pass  |
-| `__user_proc` | ✅ Pass  |
-| `a_user_proc` | ✅ Pass  |
+| TCL proc name | Vivado 2025.1 | Vivado 2024.2 |
+| ------------- | ------------- | ------------- |
+| `0_user_proc` | ❌ Fail       | ❌ Fail       |
+| `7_user_proc` | ❌ Fail       | ❌ Fail       |
+| `8_user_proc` | ✅ Pass       | ✅ Pass       |
+| `__user_proc` | ✅ Pass       | ✅ Pass       |
+| `a_user_proc` | ✅ Pass       | ✅ Pass       |
 
 Regardless of the results, the TCL procedure is called as expected at the begin of the firmware build process. Reviewing the `vivado.log` file, it appears the XDC file somehow appears messed up:
 
